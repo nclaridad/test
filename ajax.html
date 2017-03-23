@@ -1,0 +1,78 @@
+<html>
+<body>
+<script language="javascript" type="text/javascript">
+<!-- 
+//Browser Support Code
+function ajaxFunction(){
+   var ajaxRequest;  // The variable that makes Ajax possible!
+   try{
+   
+      // Opera 8.0+, Firefox, Safari
+      ajaxRequest = new XMLHttpRequest();
+   }catch (e){
+      
+      // Internet Explorer Browsers
+      try{
+         ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+      }catch (e) {
+         
+         try{
+            ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+         }catch (e){
+         
+            // Something went wrong
+            alert("Your browser broke!");
+            return false;
+         }
+      }
+   }
+   
+   // Create a function that will receive data
+   // sent from the server and will update
+   // div section in the same page.
+   ajaxRequest.onreadystatechange = function(){
+   
+      if(ajaxRequest.readyState == 4){
+         var ajaxDisplay = document.getElementById('ajaxDiv');
+         ajaxDisplay.innerHTML = ajaxRequest.responseText;
+      }
+   }
+   
+   // Now get the value from user and pass it to
+   // server script.
+   var firstName = document.getElementById('firstName').value;
+   var lastName = document.getElementById('lastName').value;
+   var gender = document.getElementById('gender').value;
+   var queryString = "?gender=" + gender ;
+   
+   queryString +=  "&lastName=" + lastName + "&firstName=" + firstName;
+   ajaxRequest.open("GET", "process.php" + queryString, true);
+   ajaxRequest.send(null); 
+}
+//-->
+</script>
+<style type="text/css">
+   table{
+      width: 100%;
+      border: 1px solid #000;
+      border-collapse: collapse;
+   }
+   th, td {
+      border-left: 1px solid #000;
+   }
+   tr {
+      border: 1px solid #000;
+   }
+</style>
+<form name='myForm'>
+
+   First Name: <input type='text' id='firstName' /> <br />
+   Last Name: <input type='text' id='lastName' /> <br />
+   <select id='gender'>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+   </select>
+   <input type='button' onclick='ajaxFunction()' value='Query MySQL'/>   
+</form>
+<div id='ajaxDiv'>Your result will display here</div>
+</body>
