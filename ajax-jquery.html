@@ -18,7 +18,22 @@
                     },
                     success : function(res_data)
                     {
-                    	$("#ajaxDiv").html(res_data);
+                    	//$("#ajaxDiv").html(res_data);
+                    	//$('table').append(res_data);
+
+                    	var json = $.parseJSON(res_data);
+                    	var tr = '';
+
+                    	$.each(json, function(){
+                    		// alert(this['firstName']);
+                    		tr += '<tr>';
+                    		tr += '<td>' + this['firstName'] + '</td>';
+                    		tr += '<td>' + this['lastName'] + '</td>';
+                    		tr += '<td>' + this['gender'] + '</td>';
+                    		tr += '</tr>';
+                    	})
+
+                    	$('table').append(tr);
                     },
                     error:function(objAJAXRequest, strError)
                     {
@@ -52,6 +67,15 @@
 	   </select>
 	   <input type='button' id="btnSubmit" value='Query MySQL'/>   
 	</form>
-	<div id='ajaxDiv'>Your result will display here</div>
+	<div id='ajaxDiv'>
+		<table>
+			<tr>
+				<!-- <th>#</th> -->
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Gender</th>
+			</tr>
+		</table>
+	</div>
 	</body>
 </body>
