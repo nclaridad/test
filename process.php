@@ -15,9 +15,16 @@ if (mysqli_connect_errno())
 }
 
 // Retrieve data from Query String
-$firstName  = $_GET['firstName'];
-$lastName   = $_GET['lastName'];
-$gender     = $_GET['gender'];
+if($_GET){
+   $firstName  = $_GET['firstName'];
+   $lastName   = $_GET['lastName'];
+   $gender     = $_GET['gender'];
+} else {
+   $firstName  = $_POST['firstName'];
+   $lastName   = $_POST['lastName'];
+   $gender     = $_POST['gender'];
+}
+
 	
 // Escape User Input to help prevent SQL Injection
 $firstName  = mysqli_real_escape_string($con, $firstName);

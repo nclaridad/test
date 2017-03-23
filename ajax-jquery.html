@@ -9,12 +9,12 @@
 				$.ajax(
                 {
                     type    : "POST",
-                    url     : '',                    
+                    url     : 'process.php',                    
                     timeout : (300*1000),
                     data    : {
                        firstName 	: $('#firstName').val(),
 					   lastName 	: $('#lastName').val(),
-					   gender 		: $('#gender').val()
+					   gender 		: $('#gender option:selected').val()
                     },
                     success : function(res_data)
                     {
