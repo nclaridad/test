@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="jquery-3.2.0.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#btnSubmit").click(function(){
+				$.ajax(
+                {
+                    type    : "POST",
+                    url     : '',                    
+                    timeout : (300*1000),
+                    data    : {
+                       firstName 	: $('#firstName').val(),
+					   lastName 	: $('#lastName').val(),
+					   gender 		: $('#gender').val()
+                    },
+                    success : function(res_data)
+                    {
+                    	$("#ajaxDiv").html(res_data);
+                    },
+                    error:function(objAJAXRequest, strError)
+                    {
+                        //alert("Internal Error.");
+                    }
+                });
+			})
+		})
+	</script>
+	<style type="text/css">
+		table{
+			width: 100%;
+			border: 1px solid #000;
+			border-collapse: collapse;
+		}
+		th, td {
+			border-left: 1px solid #000;
+		}
+		tr {
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	<form name='myForm'>
+	   First Name: <input type='text' id='firstName' /> <br />
+	   Last Name: <input type='text' id='lastName' /> <br />
+	   <select id='gender'>
+	      <option value="Male">Male</option>
+	      <option value="Female">Female</option>
+	   </select>
+	   <input type='button' id="btnSubmit" value='Query MySQL'/>   
+	</form>
+	<div id='ajaxDiv'>Your result will display here</div>
+	</body>
+</body>
